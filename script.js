@@ -1,22 +1,25 @@
-let age = document.querySelector("#age");
-let namee = document.querySelector("#name");
-let submit = document.querySelector("#btn");
-
-const Ashish = (age, namee) => new Promise((resolve, reject) => {
+document.getElementById('myForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  // Get the input values
+  let age = document.getElementById('age').value;
+  let name = document.getElementById('name').value;
+  
+  // Create the Promise
+  let eligibilityPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
-        if(age >= 18) {
-            resolve(`Welcome, ${namee}. You can vote`);
-        } else {
-            reject(`Oh sorry ${namee}, You aren't old enough`);
-        }
+      if(age >= 18) {
+        resolve(`Welcome, ${name}. You can vote`);
+      } else {
+        reject(`Oh sorry ${name}, You aren't old enough`);
+      }
     }, 4000);
-});
-
-submit.addEventListener("click", (e) => {
-    e.preventDefault();
-    if(namee.value != "" && age.value != ""){
-        Ashish(age.value, namee.value)
-        .then(data => alert(data))
-        .catch(err => alert(err));
-    }
+  });
+  
+  // Handle the Promise
+  eligibilityPromise.then(message => {
+    alert(message);
+  }).catch(message => {
+    alert(message);
+  });
 });
